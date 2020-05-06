@@ -1,0 +1,13 @@
+<h1> Words New Form </h1>
+<%= render 'flash_messages' %>
+<%= form_for (@word) do |f| %>
+
+  <%= f.label :name, "Name" %>
+  </br>
+  <%= f.text_field :name %>
+
+  <%= f.submit %>
+
+<% end %>
+  
+  
