@@ -10,11 +10,13 @@ class WordsController < ApplicationController
 
   def create
   binding.pry #create method was called
+  # Words creating / calling Letter and assigning (:words :letter_id) to (:letters :id)
+    params[:word][:letter_id] = Letter.find_or_create_by(name: "#{params[:word][:name].first.downcase}").id
     if @word = Word.new(word_params).save
       flash[:notice] =  'Word was successfully saved!'
     else flash[:notice] = "Not saved" 
     @word = Word.new
-    render new_word_path
+    redirect_to new_word_path # redirect because if render cache doesn't clear and gets confusing
     binding.pry
     end
     
@@ -33,7 +35,7 @@ class WordsController < ApplicationController
   end
 
   def word_params
-    params.require(:word).permit(:name)
+    params.require(:word).permit(:name, :letter_id)
   end
 
 end
