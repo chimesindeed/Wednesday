@@ -6,6 +6,5 @@ class Letter < ApplicationRecord
             format: { with: /\A[a-zA-Z]+\z/ },
             uniqueness: true,
             allow_blank: false,
-            allow_nil: false,
             length: { is: 1 }
 end
