@@ -1,5 +1,7 @@
 <h1> Words New Form </h1>
-<%= render 'flash_messages' %>
+<% if flash[:notice]%>
+  <%= render 'flash_messages' %>
+<%end%>
 <%= form_for (@word) do |f| %>
 
   <%= f.label :name, "Name" %>
