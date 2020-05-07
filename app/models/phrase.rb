@@ -1,3 +1,4 @@
 class Phrase < ApplicationRecord
-belongs_to :word
+  has_many :word_phrases
+  has_many :words, through: :word_phrases
 end

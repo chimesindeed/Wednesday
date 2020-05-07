@@ -1,7 +1,8 @@
 # Word Model
 class Word < ApplicationRecord
   belongs_to :letter
-  has_many :phrases
+  has_many :word_phrases
+  has_many :phrases, through: :word_phrases
 
   validates :name,
             format: { with: /\A[a-zA-Z]+\z/ },
