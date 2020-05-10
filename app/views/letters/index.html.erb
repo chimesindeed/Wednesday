@@ -1,0 +1,15 @@
+<% if @letters.blank? %>
+  <p>There are no Letters to List</p>
+  <p>Which means you haven't created any Words yet</p>
+<% else %>
+  </h1>HERE IS YOUR LETTERS TABLE</h1>
+  </h2>AND THEIR WORDS</h2>
+  <ul>
+<% @letters.each do |letter|%>
+    
+    <li><%= link_to letter.name, {:action => 'show', :id => letter.id }%></li>
+    <br/>
+  
+  <%end%>
+  </ul>
+  <%end%>

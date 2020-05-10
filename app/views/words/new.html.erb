@@ -2,7 +2,7 @@
 <% if flash[:notice]%>
   <%= render 'flash_messages' %>
 <%end%>
-<%= form_for (@word) do |f| %>
+<%= form_for @word, controller: 'words', action: 'create' do |f| %>
 
   <%= f.label :name, "Name" %>
   </br>
