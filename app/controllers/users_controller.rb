@@ -5,9 +5,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    binding.pry
     @user = User.new(user_params)
-    @user.save
+    @user.email.downcase!
+    if @user.save
+      flash[:notice] = 'Account created successfully!'
+    else flash.now.alert = "Couldn't create account."
+    render :new
+    end
   end
 
   def delete
@@ -15,8 +19,5 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password)
-  end
-  def current_user
-    current_user = User.find_by_id()
   end
 end
