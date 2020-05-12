@@ -1,3 +1,4 @@
+<%= render 'shared/head' %>
 <h1>Login</h1>
 <%= form_for sessions_path, controller: 'sessions', action: 'create' do |f| %>
   <%= f.label :email %>

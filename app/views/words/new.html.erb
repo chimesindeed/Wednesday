@@ -1,6 +1,7 @@
+<%=render 'shared/head' %>
 <h1> Words New Form </h1>
 <% if flash[:notice]%>
-  <%= render 'flash_messages' %>
+  <%= render 'shared/flash_messages' %>
 <%end%>
 <%= form_for @word, controller: 'words', action: 'create' do |f| %>
 
