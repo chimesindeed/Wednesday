@@ -1,19 +1,23 @@
 #
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
+  
   root to: 'butterrolls#main'
+
   resources :sessions, only: %i[new create destroy]
+  
   get 'main', :to => 'butterrolls#main', as: 'main'
+  get 'about', :to => 'butterrolls#about', as: 'about'
+  
   get 'signup', :to => 'users#new', as: 'signup'
   get 'login', :to => 'sessions#new', as: 'login'
-  get 'logout', :to => 'sessions#destroy', as: 'logout'
-
+  post 'login', :to => 'sessions#create', as: 'verified'
+  post 'logout', :controller =>'sessions', :action => 'destroy', :method => 'delete'
+  resource :session
   resources :users
   post 'users', :to => 'users#create'
 
   resources :words
-  resources :letters, only: [:show] do
+  resources :letters, only: %i[index show] do
     resources :words
   end
 end

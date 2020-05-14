@@ -1,12 +1,15 @@
 <%= render 'shared/head' %>
 <h1>Login</h1>
-<%= form_for sessions_path, controller: 'sessions', action: 'create' do |f| %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
+<% if flash[:notice]%>
+  <%= render 'shared/flash_messages' %>
+<%end%>
+<%= form_tag sessions_path do %>
+  <%= label_tag :email %>
+  <%= text_field_tag :email %>
 <br/>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
 
-  <%= f.submit "Login" %>
+  <%= submit_tag "Login" %>
 
 <% end %>  

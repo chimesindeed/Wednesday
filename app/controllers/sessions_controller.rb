@@ -4,18 +4,28 @@ class SessionsController < ApplicationController
   end
 
   def create
-    binding.pry
+  #CREATE METHOD HIT
     user = User.find_by_email(params[:email])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      #redirect_to 'new', notice: 'Logged in!'
+    if user
+      if user.authenticate(params[:password])
+        session[:user_id] = user.id
+        #USER EXISTS AND HAS BEEN AUTHENTICATED
+        redirect_to '/', notice: 'Logged in!'
+      else
+        redirect_to '/', notice: 'password incorrect, please retry'
+      #USER EXISTS BUT NOT AUTHENTICATED
+      end
     else
-     puts "hello" #render :new
+    #Incorrect email
+      redirect_to '/', notice: 'email not found! Try again with different email or create an account.'
     end
   end
-
+  def logout
+  end
+  
   def destroy
-    session[:user_id] = nil
-    redirect_to 'new', notice: 'Logged out!'
+    session.delete :user_id
+    binding.pry
+    redirect_to '/'
   end
 end

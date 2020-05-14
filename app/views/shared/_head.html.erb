@@ -1,52 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Blank Template for Bootstrap</title>
-        <!-- Bootstrap core CSS -->
-        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="style.css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="border-danger container text-center">
-            <nav class="bg-dark navbar navbar-dark navbar-expand-lg">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor01">
-                    <ul class="mr-auto navbar-nav">
-                        <a class="nav-link" href= <%=root_path %> > Home <span class="sr-only">(current)</span></a>
-                        <a class="nav-link" href= <%=root_path %> > Home <span class="sr-only">(current)</span></a>
-                        <a class="nav-link" href= <%=root_path %> > Home <span class="sr-only">(current)</span></a>
-                        <a class="nav-link" href= <%=root_path %> > Home <span class="sr-only">(current)</span></a>
-                        <a class="nav-link" href= <%=new_word_path %> >About<span class="sr-only">(current)</span></a>
-                        <a class="nav-link" href="login"> <%if current_user%>Logout<% else %>Login<%end%><span class="sr-only">(current)</span></a>
-                        <a class="nav-link" href="#"><span class="sr-only">Ab(current)</span></a>
-                    </ul>
-                </div>
-            </nav>
-            <h1 class="display-4"><span>WEDNESDAY</span></h1>
-                <p><br></p>
-            </div>
-           
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Blank Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="border-danger container text-center">
+      <nav class="bg-dark navbar navbar-dark navbar-expand-lg">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="mr-auto navbar-nav">
+            <a class="nav-link" href= <%=root_path %> >Home<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href= <%=about_path %> >About<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href= <%=signup_path %> >Signup<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href= <%=letters_path %> >Your Letters<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href= <%=new_word_path %> >Your Words<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href= <%=new_word_path %> >Your Phrases<span class="sr-only">(current)</span></a>
+            <a class="nav-link"
+                                <%if current_user%>
+                                  <%= link_to "logout", {:controller => "sessions", :action=> "destroy"}, :method => :delete%>
+                                <%else%>href= <%=login_path %> >Login<%end%><span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#"><span class="sr-only">Ab(current)</span></a>
+          </ul>
         </div>
-        <div class="container">
-            <h1 class=" text-monospace"><span style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 75px;"></span></h1>
-        </div>
-        <div class="container">
-</div>
-        <!-- Bootstrap core JavaScript
-    ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <div class="jumbotron jumbotron-fluid">
-</div>
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/popper.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-    </body>
+      </nav>
+      <h1 class="display-4"><span>WEDNESDAY</span></h1>
+    </div>
+    
+    <!-- Bootstrap core JavaScript
+  ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/popper.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
 </html>
