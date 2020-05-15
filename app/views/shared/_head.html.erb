@@ -13,28 +13,44 @@
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
-    <div class="border-danger container text-center">
-      <nav class="bg-dark navbar navbar-dark navbar-expand-lg">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarColor01">
+    
+    <div class="border-danger container text-center"style = "background-color: #e1b382;">
+      <nav class="bg-dark navbar navbar-dark navbar-expand-lg" style = "background-color: #e1b382;">
+        
+        <div class="collapse navbar-collapse id="navbarColor01" style = "background-color: #2d545e;">
           <ul class="mr-auto navbar-nav">
-            <a class="nav-link" href= <%=root_path %> >Home<span class="sr-only">(current)</span></a>
-            <a class="nav-link" href= <%=about_path %> >About<span class="sr-only">(current)</span></a>
-            <a class="nav-link" href= <%=letters_path %> >Your Letters<span class="sr-only">(current)</span></a>
-            <a class="nav-link" href= <%=new_word_path %> >Your Words<span class="sr-only">(current)</span></a>
-            <a class="nav-link" href= <%=new_word_path %> >Your Phrases<span class="sr-only">(current)</span></a>
-            <%if current_user %>Welcome
-            <%else%>
-              <a class="nav-link" href= <%=signup_path %> >Signup<span class="sr-only">(current)</span></a>
+            <a class="nav-link" style = "background-color: #6B7a8F; color: white" href= <%=root_path %> >Home<span class="sr-only">(current)</span></a>
+            <a class="nav-link" style = "background-color: #F7882F; color: blue" href= <%=about_path %> >About<span class="sr-only">(current)</span></a>
+            <%if current_user %><a class="nav-link" style = "background-color: #F7C331;" href="">Welcome</a>
+            <%else%><a class="nav-link" style = "background-color: #F7C331; color: green" href= <%=signup_path %> >Signup<span class="sr-only">(current)</span></a>
             <%end%>
-            
-            <a class="nav-link"
+            <a class="nav-link" style = "background-color: #DCC7AA; color: #654321;"
               <%if current_user%>
                 <%= link_to "logout", {:controller => "sessions", :action=> "destroy"}, :method => :delete%>
               <%else%>href= <%=login_path %> >Login
               <%end%><span class="sr-only">(current)</span></a>
+               
+                <div class="dropdown"> 
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                    Your Letters                </button>                     
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
+                        <a class="dropdown-item" href=<%=letters_path %> >Letters Index</a> 
+                    </div>                     
+                </div>
+                <div class="dropdown"> 
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                    Your Words                </button>                     
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
+                        <a class="dropdown-item" href=<%=new_word_path %> >Create Word</a> 
+                        <a class="dropdown-item" href=<%=words_path %> >Word Index</a> 
+                    </div>                     
+                </div>  
+                <div class="dropdown"> 
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                    Your Phrases                </button>                     
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
+                         <a class="dropdown-item" href=<%=new_word_path %> >Create Word</a> 
+                        <a class="dropdown-item" href=<%=words_path %> >Word Index</a> 
+                    </div>                     
+                </div>          
+        
             <a class="nav-link" href="#"><span class="sr-only">Ab(current)</span></a>
           </ul>
         </div>
