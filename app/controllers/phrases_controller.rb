@@ -1,7 +1,7 @@
 class PhrasesController < ApplicationController
   
   before_action :logged_in?
-  before_action :set_phrase, only: %i[show edit update destroy]
+  before_action :only_user, only: %i[show edit update destroy]
   def index
     @phrases = Phrase.where(user_id: session[:user_id])
   end
@@ -41,7 +41,11 @@ class PhrasesController < ApplicationController
   def phrase_params
     params.require(:phrase).permit(:name, :user_id)
   end
-  def set_phrase
+   def only_user
     @phrase = Phrase.find(params[:id])
+    unless @phrase.user_id == current_user.id
+        redirect_to '/', flash[:notice] => "Access denied."
+    end
   end
+ 
 end
