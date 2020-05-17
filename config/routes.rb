@@ -15,9 +15,6 @@ Rails.application.routes.draw do
   resource :session
   resources :users
   post 'users', :to => 'users#create'
-
   resources :words
-  resources :letters, only: %i[index show] do
-    resources :words
-  end
+  resources :phrases
 end

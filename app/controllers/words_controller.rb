@@ -1,7 +1,7 @@
 class WordsController < ApplicationController
 
   before_action :logged_in?
-  before_action :set_word, only: %i[show edit update destroy]
+  before_action :only_user, only: %i[show edit update destroy]
   def index
     @words = Word.where(user_id: session[:user_id])
     
@@ -35,7 +35,10 @@ class WordsController < ApplicationController
   end
 
   def show
+    unless @word.user_id == current_user.id
+        redirect_to '/', flash[:notice] => "Access denied."
     @word = Word.find(params[:id])
+    end
   end
 
   def destroy
@@ -47,8 +50,12 @@ class WordsController < ApplicationController
   def word_params
     params.require(:word).permit(:name)
   end
-  def set_word
-    @word = Word.find(params[:id])
-  end
 
+  def only_user
+    @word = Word.find(params[:id])
+    unless @word.user_id == current_user.id
+        redirect_to '/', flash[:notice] => "Access denied."
+    
+    end
+  end
 end
