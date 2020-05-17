@@ -3,7 +3,7 @@
 <% if flash[:notice]%>
   <%= render 'shared/flash_messages' %>
 <%end%>
-<%= form_for @word, controller: 'words', action: 'create' do |f| %>
+<%= form_for @word do |f| %>
 
   <%= f.label :name, "Name" %>
   </br>

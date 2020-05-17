@@ -1,0 +1,11 @@
+<%= render 'shared/head' %>
+<h1>Index of Phrases Page </h1>
+
+<ul>
+
+<% @phrases.each do | phrase | %>
+  <li> <%= phrase.name  %>   <%= link_to 'Show', phrase_path(phrase)%>    <%= link_to 'Edit', edit_phrase_path(phrase)%><%= link_to 'Delete', phrase_path(phrase), method: :delete %> </li> 
+  </br>
+<% end  %>
+
+</ul>

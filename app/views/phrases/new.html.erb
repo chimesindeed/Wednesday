@@ -1,16 +1,16 @@
 <%= render 'shared/head' %>
 
-<h1> Edit Word</h1>
+<h1> New Phrase</h1>
 <% if flash[:notice]%>
   <%= render 'shared/flash_messages' %>
 <%end%>
-<%= form_for @word do |f| %>
+<%= form_for @phrase do |f| %>
 
   <%= f.label :name, "Name" %>
   </br>
-  <%= f.text_field :name %>
+  <%= f.text_area :name %>
 
-  <%= f.submit "Update Word" %>
+  <%= f.submit "Create Phrase" %>
 
 <% end %>
   
