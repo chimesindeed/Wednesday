@@ -1,7 +1,10 @@
 class WordsController < ApplicationController
 
+  before_action :logged_in?
+  before_action :set_word, only: %i[show edit update destroy]
   def index
-    @words = Word.all
+    @words = Word.where(user_id: session[:user_id])
+    
   end
 
   def new
@@ -9,33 +12,43 @@ class WordsController < ApplicationController
   end
 
   def create
-  binding.pry #create method was called
-  # Words creating / calling Letter and assigning (:words :letter_id) to (:letters :id)
-    params[:word][:letter_id] = Letter.find_or_create_by(name: "#{params[:word][:name].first.downcase}").id
-    if @word = Word.new(word_params).save
+    @word = Word.new(word_params)
+    @word[:user_id] = session[:user_id]
+    if @word.save
       flash[:notice] =  'Word was successfully saved!'
-    else flash[:notice] = "Not saved" 
-    @word = Word.new
-    redirect_to new_word_path # redirect because if render cache doesn't clear and gets confusing
-    binding.pry
-    end
+      redirect_to words_path
+    else
+      flash[:notice] = "Not saved" 
+      redirect_to new_word_path
+      end
     
   end
   
   def edit
+    @word = Word.find(params[:id])
   end
 
-  def update
+  def update  
+    @word = Word.find(params[:id])
+    @word.update(name: params[:word][:name])
+    redirect_to words_path
   end
 
   def show
+    @word = Word.find(params[:id])
   end
 
-  def delete
+  def destroy
+    @word = Word.find(params[:id])
+    @word.destroy
+    redirect_to words_path
   end
 
   def word_params
-    params.require(:word).permit(:name, :letter_id)
+    params.require(:word).permit(:name)
+  end
+  def set_word
+    @word = Word.find(params[:id])
   end
 
 end
