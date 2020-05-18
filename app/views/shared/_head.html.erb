@@ -21,13 +21,17 @@
           <ul class="mr-auto navbar-nav">
             <a class="nav-link" style = "background-color: #6B7a8F; color: white" href= <%=root_path %> >Home<span class="sr-only">(current)</span></a>
             <a class="nav-link" style = "background-color: #F7882F; color: blue" href= <%=about_path %> >About<span class="sr-only">(current)</span></a>
-            <%if current_user %><a class="nav-link" style = "background-color: #F7C331;" href="">Welcome</a>
-            <%else%><a class="nav-link" style = "background-color: #F7C331; color: green" href= <%=signup_path %> >Signup<span class="sr-only">(current)</span></a>
+            <%if user_signed_in?%>
+              <a class="nav-link" style = "background-color: #F7C331;">Welcome</a>
+            <%else%>
+              <a class="nav-link" style = "background-color: #F7C331; color: green" <%= link_to "signup", new_user_registration_path %><span class="sr-only">(current)</span></a>
             <%end%>
+            
             <a class="nav-link" style = "background-color: #DCC7AA; color: #654321;"
-              <%if current_user%>
-                <%= link_to "logout", {:controller => "sessions", :action=> "destroy"}, :method => :delete%>
-              <%else%>href= <%=login_path %> >Login
+              <%if current_user %>
+                <%= link_to "logout", destroy_user_session_path, :method => :delete%>
+              <%else%>
+                <%= link_to "sign-in", new_user_session_path %>
               <%end%><span class="sr-only">(current)</span></a>
                
                 <div class="dropdown"> 
@@ -44,13 +48,25 @@
                         <a class="dropdown-item" href=<%=phrases_path %> >Phrase Index</a> 
                     </div>                     
                 </div>          
-        
-            <a class="nav-link" href="#"><span class="sr-only">Ab(current)</span></a>
+         <div class="dropdown"> 
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                    Your Matches                </button>                     
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
+                         <a class="dropdown-item" href=<%=new_phrase_path %> >Create Matche</a> 
+                        <a class="dropdown-item" href=<%=phrases_path %> >Match Index</a> 
+                    </div>                     
+                </div>          
+           
+              
           </ul>
         </div>
       </nav>
       <h1 class="display-4"><span>WEDNESDAY</span></h1>
+       
     </div>
+    <div class="messages">
+              <p class="notice"><%= notice %></p>
+              <p class="alert"><%= alert %></p>
+            </div>
     
     <!-- Bootstrap core JavaScript
   ================================================== -->

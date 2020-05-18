@@ -1,9 +1,9 @@
 class PhrasesController < ApplicationController
   
-  before_action :logged_in?
-  before_action :only_user, only: %i[show edit update destroy]
+  #before_action :logged_in?
+  #before_action :only_user, only: %i[show edit update destroy]
   def index
-    @phrases = Phrase.where(user_id: session[:user_id])
+    @phrases = Phrase.all
   end
 
   def new

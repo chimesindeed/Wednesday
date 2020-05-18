@@ -1,15 +1,10 @@
 #
 class ApplicationController < ActionController::Base
-  def logged_in?
-    unless session[:user_id]
-      redirect_to 'butterrolls#main', notice: "You must be logged in to access this area"
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+    protected
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     end
-  end
-
-  def current_user
-    User.where(id: session[:user_id]).first # scope method
-  end
-    helper_method :current_user
-    helper_method :logged_in?
+    
 end
-

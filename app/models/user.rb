@@ -1,18 +1,16 @@
-#
 class User < ApplicationRecord
-  has_many :words
-  has_many :phrases
-  has_many :matches
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers =>[:github]
   
-  has_secure_password
-
-  validates :email,
-            presence: true,
-            uniqueness: true,
-            format: {
-              with: /\A([^@\s]+)@((?:[a-z0-9]+\.)+[a-z]{2,})\z/i
-            }
-  # validates :password,
-            # format
-            # length
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.provider = auth.provider
+      user.name = auth.info.name
+      user.uid = auth.uid
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+    end
+  end
 end

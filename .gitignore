@@ -7,7 +7,7 @@
 # Ignore bundler config.
 /.bundle
 
-/.env
+/config/initializers/omniauth.rb
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
@@ -25,7 +25,7 @@
 
 /public/assets
 .byebug_history
-
+.env
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
