@@ -4,6 +4,11 @@ class SessionsController < ApplicationController
   end
 
   def create
+    auth_hash = request.env['omniauth.auth']
+    render :text => auth_hash.inspect
+  end
+  
+  def create1
   #CREATE METHOD HIT
     user = User.find_by_email(params[:email])
     if user
@@ -20,11 +25,15 @@ class SessionsController < ApplicationController
       redirect_to '/', notice: 'email not found! Try again with different email or create an account.'
     end
   end
+  
   def logout
   end
   
   def destroy
     session.delete :user_id
     redirect_to '/'
+  end
+  
+  def failure
   end
 end

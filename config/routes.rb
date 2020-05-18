@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   post 'users', :to => 'users#create'
   resources :words
   resources :phrases
+  resources :matches
 end
