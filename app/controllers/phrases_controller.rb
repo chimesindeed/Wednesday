@@ -1,9 +1,7 @@
 class PhrasesController < ApplicationController
-  
-  #before_action :logged_in?
-  #before_action :only_user, only: %i[show edit update destroy]
+  before_action :check
   def index
-    @phrases = Phrase.all
+    @phrases = current_user.phrases.all
   end
 
   def new
@@ -12,7 +10,7 @@ class PhrasesController < ApplicationController
 
   def create
     @phrase = Phrase.new(phrase_params)
-    @phrase[:user_id]=session[:user_id]
+    @phrase[:user_id] = current_user.id 
     if @phrase.save
       flash[:notice] =  'Phrase was successfully saved!'
       redirect_to phrases_path
@@ -23,17 +21,21 @@ class PhrasesController < ApplicationController
   end
   
   def edit
+    @phrase = current_user.phrases.find(params[:id])
   end
 
-  def update  
+  def update
+    @phrase = Phrase.find(params[:id])
     @phrase.update(name: params[:phrase][:name])
     redirect_to phrases_path
   end
 
   def show
+    @phrase = current_user.phrases.find(params[:id])
   end
 
   def destroy
+    @phrase = Phrase.find(params[:id])
     @phrase.destroy
     redirect_to phrases_path
   end
@@ -41,11 +43,5 @@ class PhrasesController < ApplicationController
   def phrase_params
     params.require(:phrase).permit(:name, :user_id)
   end
-   def only_user
-    @phrase = Phrase.find(params[:id])
-    unless @phrase.user_id == current_user.id
-        redirect_to '/', flash[:notice] => "Access denied."
-    end
-  end
- 
+   
 end

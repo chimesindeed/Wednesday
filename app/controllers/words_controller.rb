@@ -1,9 +1,9 @@
-# /app/controllers words_controller.rb
+# /app/controllers/words_controller.rb
 class WordsController < ApplicationController
   before_action :check
   
   def index 
-      @words = current_user.words.all
+    @words = current_user.words.all
   end
 
   def new
@@ -45,6 +45,5 @@ class WordsController < ApplicationController
   def word_params
     params.require(:word).permit(:name, :user_id)
   end
-
  
 end
