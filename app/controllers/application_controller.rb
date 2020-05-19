@@ -6,5 +6,11 @@ class ApplicationController < ActionController::Base
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     end
-    
+   
+    def check
+    if !current_user
+      redirect_to 'butterrolls#main'
+      return  
+    end
+  end  
 end
