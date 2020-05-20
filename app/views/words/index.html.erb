@@ -1,10 +1,8 @@
 <%= render 'shared/head' %>
 <h1>Index of Words Page </h1>
-
 <ul>
-
 <% @words.each do | word | %>
-  <li> <%= word.name  %>   <%= link_to 'Show', word_path(word)%>    <%= link_to 'Edit', edit_word_path(word)%>     <%= link_to 'Delete', word_path(word), method: :delete %> </li> 
+  <li> <%= word.name  %>   <%= link_to 'Show', word_path(word)%>    <%= link_to 'Edit', edit_word_path(word)%>     <%= link_to 'Delete', word_path(word), method: :delete %> </li>
   </br>
 <% end  %>
 
