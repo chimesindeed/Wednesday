@@ -3,7 +3,10 @@ class WordsController < ApplicationController
   before_action :check
   
   def index 
-    @words = current_user.words.all
+    @words = current_user.words.order(:name) # scope method querying database directly instead of pulling into model object and doing
+                                     # .each do. Faster.  Thought of putting button in view to sort but in html/erb
+                                     # button would call another controller method where I'd be doing the same thing.
+                                     # and then throwing back to the same view with sorted words list.
   end
 
   def new
