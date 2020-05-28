@@ -1,2 +1,11 @@
-<h1>Matches#show</h1>
-<p>Find me in app/views/matches/show.html.erb</p>
+<%= render 'shared/head' %>
+<h1>Match</h1>
+
+<h4> <%= Word.find(@match.word_id).name %> - - - > <%= Phrase.find(@match.phrase_id).name %> </h4>
+      
+      <div>
+        <h6> <%= @match.note %> </h6>
+      </div>
+
+<p>  <%= link_to 'Edit', edit_match_path(@match) %> </p>
+<p> <%= link_to 'Delete', match_path(@match), method: :delete %> </p>

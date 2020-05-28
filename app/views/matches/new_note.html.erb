@@ -1,0 +1,13 @@
+<%= render 'shared/head' %>
+
+<h2> Note</h2>
+
+  <%= form_for @match do |f| %>
+    <%= f.label :note, "Note" %>
+    </br>
+    <%= f.text_area :note %>
+    </br>
+    <%= f.submit "Create Note" %>
+  <% end %>
+
+            

@@ -15,21 +15,20 @@
     <link href="pricing.css" rel="stylesheet">
   </head>
   <body>
-    <center><h2> Make A Match </h2></center>
-    <center><h4> Select The Word and Phrase You Want to Match </h4></center>
+    <center><h2> Edit Match </h2></center>
       <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
         <nav class="my-2 my-md-0 mr-md-3">
         </nav>
                                                     <%= form_for @match do | match | %>
         </div>
-        
+
       <div class="container">
         <div class="card-deck mb-3 text-center">
-            
+
           <div class="card mb-4 box-shadow">
             <div class="card-body">
               <h1 class="card-title pricing-card-title">Your Words</h1>
-                        
+
               <ul class="list-unstyled mt-3 mb-4">
                                                       <% @words.each do |word| %>
                                                         <%= match.fields_for word do |w| %>
@@ -42,27 +41,27 @@
                                                         <% end %>
                                                       <%end%>
               </ul>
-                  
+
             </div>
           </div>
-            
+
           <div class="card mb-4 box-shadow">
             <div class="card-body">
               <h1 class="card-title pricing-card-title">Your Phrases</h1>
-                
+
               <ul class="list-unstyled mt-3 mb-4">
                                                       <% @phrases.each do |phrase| %>
                                                         <%= match.fields_for phrase do |p| %>
                                                           <div>
-                                                            <li> 
+                                                            <li>
                                                               <%= p.label :id, phrase.name %>
                                                               <%= p.radio_button :id, phrase.id, :checked => true %>
                                                             </li>
                                                           </div>
                                                         <% end %>
                                                       <%end%>
-              </ul> 
-            </div>                                    
+              </ul>
+            </div>
           </div>
                                                       <%= match.label :note, 'Note' %>
                                                       <%= match.text_area :note %>
@@ -71,8 +70,8 @@
         </div>
       </div>
 
-                                                     
-  
+
+
         <!-- Bootstrap core JavaScript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->

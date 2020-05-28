@@ -4,7 +4,7 @@ class CreateMatches < ActiveRecord::Migration[6.0]
       t.integer :word_id
       t.integer :phrase_id
       t.integer :user_id
-      t.integer :degree
+      t.text    :note
     end
   end
 end

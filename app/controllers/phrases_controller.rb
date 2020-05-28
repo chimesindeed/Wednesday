@@ -10,16 +10,16 @@ class PhrasesController < ApplicationController
 
   def create
     @phrase = Phrase.new(phrase_params)
-    @phrase[:user_id] = current_user.id 
+    @phrase[:user_id] = current_user.id
     if @phrase.save
-      flash[:notice] =  'Phrase was successfully saved!'
+      flash[:notice] = 'Phrase was successfully saved!'
       redirect_to phrases_path
     else
-      flash[:notice] = "Not saved" 
+      flash[:notice] = 'Not saved'
       redirect_to new_phrase_path
-      end
+    end
   end
-  
+
   def edit
     @phrase = current_user.phrases.find(params[:id])
   end
@@ -43,5 +43,4 @@ class PhrasesController < ApplicationController
   def phrase_params
     params.require(:phrase).permit(:name, :user_id)
   end
-   
 end

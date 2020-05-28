@@ -1,9 +1,7 @@
 <%= render 'shared/head' %>
 
 <h1> Edit Phrase</h1>
-<% if flash[:notice]%>
-  <%= render 'shared/flash_messages' %>
-<%end%>
+
 <%= form_for @phrase do |f| %>
 
   <%= f.label :name, "Name" %>

@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2020_05_18_093709) do
     t.integer "word_id"
     t.integer "phrase_id"
     t.integer "user_id"
-    t.integer "degree"
+    t.text "note"
   end
 
   create_table "phrases", force: :cascade do |t|

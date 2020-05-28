@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   
   get 'main', :to => 'butterrolls#main', as: 'main'
   get 'about', :to => 'butterrolls#about', as: 'about'
+  get 'match/note', :to => 'matches#new_note', as: 'new_note'
   
   resources :words
   resources :phrases
   resources :matches
+  
 end
