@@ -6,6 +6,11 @@ class Word < ApplicationRecord
             length: { minimum: 2, maximum: 25 },
             format: { with: /\A[a-zA-Z]+\z/ },
             allow_blank: false
+            before_save { self.name.downcase!}
+  
 
+  def self.order_words
+   Word.order(:name)
+  end
 
 end
