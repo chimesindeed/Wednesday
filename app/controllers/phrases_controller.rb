@@ -1,5 +1,5 @@
 class PhrasesController < ApplicationController
-  before_action :check
+  before_action :check, :set_phrase, only: [ :edit, :update, :show, :destroy ]
   def index
     @phrases = current_user.phrases.all
   end
@@ -9,8 +9,8 @@ class PhrasesController < ApplicationController
   end
 
   def create
-    @phrase = Phrase.new(phrase_params)
-    @phrase[:user_id] = current_user.id
+    @phrase = current_user.phrases.new(phrase_params)
+    # @phrase[:user_id] = current_user.id
     if @phrase.save
       flash[:notice] = 'Phrase was successfully saved!'
       redirect_to phrases_path
@@ -20,9 +20,7 @@ class PhrasesController < ApplicationController
     end
   end
 
-  def edit
-    @phrase = current_user.phrases.find(params[:id])
-  end
+  def edit; end
 
   def update
     @phrase = Phrase.find(params[:id])
@@ -30,15 +28,18 @@ class PhrasesController < ApplicationController
     redirect_to phrases_path
   end
 
-  def show
-    @phrase = current_user.phrases.find(params[:id])
-  end
+  def show; end
 
   def destroy
-    @phrase = Phrase.find(params[:id])
     @phrase.destroy
     redirect_to phrases_path
   end
+
+  def set_phrase
+    @phrase = current_user.phrases.find(params[:id])
+  end
+
+  private
 
   def phrase_params
     params.require(:phrase).permit(:name, :user_id)

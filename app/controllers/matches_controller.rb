@@ -1,6 +1,6 @@
 # /app/controllers/matches_controller.rb
 class MatchesController < ApplicationController
-  before_action :check
+  before_action :check, :set_match, only: [ :edit, :update, :show, :destroy ]
 
   def index
     @matches = current_user.matches.all
@@ -13,11 +13,11 @@ class MatchesController < ApplicationController
   end
 
   def create
-    match = Match.new(match_params)
-    match[:user_id] = current_user.id
-    match[:word_id] = params[:match][:word][:id]
-    match[:phrase_id] = params[:match][:phrase][:id]
-    if match.save
+    @match = current_user.matches.new(match_params)
+    # @match[:user_id] = current_user.id
+    @match[:word_id] = params[:match][:word][:id]
+    @match[:phrase_id] = params[:match][:phrase][:id]
+    if @match.save
       flash[:notice] = 'Match was successfully saved!'
       redirect_to matches_path
     else
@@ -27,23 +27,19 @@ class MatchesController < ApplicationController
   end
 
   def edit
-    @match = current_user.matches.find(params[:id])
     @words = current_user.words.all
     @phrases = current_user.phrases.all
     @note = @match.note
   end
 
   def update
-    @match = Match.find(params[:id])
-    @match.update(word_id:  params[:match][:word][:id])
+    @match.update(word_id: params[:match][:word][:id])
     @match.update(phrase_id: params[:match][:phrase][:id])
     @match.update(note: params[:match][:note])
     redirect_to match_path
   end
 
-  def show
-    @match = current_user.matches.find(params[:id])
-  end
+  def show; end
 
   def destroy
     @match = Match.find(params[:id])
@@ -51,10 +47,16 @@ class MatchesController < ApplicationController
     redirect_to matches_path
   end
 
+  def set_match
+    @match = current_user.matches.find(params[:id])
+  end
+
+  private
+
   def match_params
     params.require(:match).permit(:user_id,
                                   :word_id,
                                   :phrase_id,
-                                  :note)
+                                  :note) # submittable attribute in join table
   end
 end
