@@ -10,14 +10,15 @@ Rails.application.routes.draw do
   
   get 'main', :to => 'butterrolls#main', as: 'main'
   get 'about', :to => 'butterrolls#about', as: 'about'
-  get 'match/note', :to => 'matches#new_note', as: 'new_note'
+  # get 'match/note', :to => 'matches#new_note', as: 'new_note'
   
+  get 'words/alphabetize', :to => 'words#alphabetize'
   resources :words
   resources :phrases
   resources :matches
 
   resources :users, only: [ :show ] do
-    resources :words, only: [:index, :new]
+    resources :words, only: [:index, :new, :alphabetize]
     end
     
 end

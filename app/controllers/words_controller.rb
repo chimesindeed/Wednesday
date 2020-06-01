@@ -1,9 +1,10 @@
 # /app/controllers/words_controller.rb
 class WordsController < ApplicationController
-  before_action :check, :set_word, only: [ :edit, :update, :show, :destroy ]
+  before_action :check,
+                :set_word, only: [ :edit, :update, :show, :destroy ]
 
   def index
-    @words = current_user.words.order_words
+    @words = current_user.words
   end
 
   def new
@@ -36,6 +37,10 @@ class WordsController < ApplicationController
     redirect_to words_path
   end
 
+  def alphabetize
+    @words = current_user.words.order_words # order_words - Model class scope method
+  end
+  
   def set_word
     @word = current_user.words.find(params[:id])
   end
@@ -45,4 +50,4 @@ class WordsController < ApplicationController
   def word_params
     params.require(:word).permit(:name, :user_id)
   end
-end
+end # end of file
