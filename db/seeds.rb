@@ -37,7 +37,3 @@
     Phrase.create(:name=> "S is for Story",         :user_id => 3)
     Phrase.create(:name=> "E is for Exalted",       :user_id => 3)
 #---------------------------------
-    Match.create(:word_id => 1, :phrase_id =>1, :user_id => 2)
-    Match.create(:word_id => 3, :phrase_id =>2, :user_id => 2)
-    Match.create(:word_id => 4, :phrase_id =>3, :user_id => 3)
-    Match.create(:word_id => 5, :phrase_id =>4, :user_id => 3)
