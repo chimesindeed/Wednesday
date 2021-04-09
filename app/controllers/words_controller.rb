@@ -1,9 +1,9 @@
 class WordsController < ApplicationController
-
-  #before_action :logged_in?
+  
   before_action :logged_in?, only: %i[show edit update destroy]
+  
   def index
-    @words = Word.all  
+    @words = Word.where(user_id:  current_user.id)
   end
 
   def new
@@ -12,7 +12,7 @@ class WordsController < ApplicationController
 
   def create
     @word = Word.new(word_params)
-    @word[:user_id] = session[:user_id]
+    @word[:user_id] = current_user.id
     
     if @word.save
       flash[:notice] =  'Word was successfully saved!'
@@ -20,7 +20,8 @@ class WordsController < ApplicationController
     else
       flash[:notice] = "Not saved" 
       redirect_to new_word_path
-      end 
+    end
+    
   end
   
   def edit
@@ -32,7 +33,7 @@ class WordsController < ApplicationController
   end
 
   def show
-    end
+  end
 
   def destroy
     @word.destroy
@@ -46,7 +47,7 @@ class WordsController < ApplicationController
   def logged_in?
     @word = Word.find(params[:id])
     unless @word.user_id == current_user.id
-        redirect_to '/', flash[:notice] => "Access denied."
+      redirect_to '/', flash[:notice] => "Access denied."
     end
   end
 
